@@ -5,251 +5,304 @@ import Icon from "@/components/ui/icon";
 import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
-  const recentGames = [
-    {
-      id: 1,
-      title: "Ведьмак 3: Дикая охота",
-      progress: 81,
-      rating: "❤️"
-    },
-    {
-      id: 2,
-      title: "Ведьмак 3: Дикая охота",
-      progress: 81,
-      rating: "❤️"
-    },
-    {
-      id: 3,
-      title: "Ведьмак 3: Дикая охота",
-      progress: 81,
-      rating: "❤️"
-    }
+  const gameLibrary = [
+    { title: "The Witcher 3", progress: 87, nodes: 124, color: "from-purple-600 to-pink-600" },
+    { title: "Cyberpunk 2077", progress: 43, nodes: 89, color: "from-blue-600 to-cyan-600" },
+    { title: "Mass Effect", progress: 100, nodes: 156, color: "from-green-600 to-emerald-600" },
+    { title: "Detroit", progress: 62, nodes: 78, color: "from-orange-600 to-red-600" },
+  ];
+
+  const recentActivity = [
+    { action: "Explored new branch", time: "2m", game: "The Witcher 3" },
+    { action: "Completed chapter", time: "15m", game: "Cyberpunk 2077" },
+    { action: "Made critical choice", time: "1h", game: "Mass Effect" },
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex">
-      {/* Левая боковая панель */}
-      <div className="w-16 bg-card border-r border-border flex flex-col items-center py-6 space-y-6">
-        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground">
-          <span className="text-sm font-bold">G</span>
-        </div>
-        
-        <nav className="flex flex-col space-y-4">
-          <Button variant="ghost" size="icon" className="text-primary">
-            <Icon name="Home" size={20} />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-            <Icon name="Bookmark" size={20} />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-            <Icon name="TrendingUp" size={20} />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-            <Icon name="Users" size={20} />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-            <Icon name="Trophy" size={20} />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-            <Icon name="User" size={20} />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-            <Icon name="Settings" size={20} />
-          </Button>
-        </nav>
-
-        <div className="mt-auto">
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-            <Icon name="HelpCircle" size={20} />
-          </Button>
-        </div>
-      </div>
-
-      {/* Основной контент */}
-      <div className="flex-1 p-6">
-        {/* Верхняя панель */}
-        <div className="mb-8 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold mb-1">Привет, Кирилл!</h1>
-            <p className="text-muted-foreground">Исследуй интерактивные игровые сюжеты!</p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <Icon name="Search" size={18} className="absolute left-3 top-3 text-muted-foreground" />
-              <input 
-                type="text" 
-                placeholder="Найти момент или игру..."
-                className="pl-10 pr-4 py-2.5 bg-input border border-border rounded-lg w-80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              />
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Top Navigation */}
+      <nav className="border-b border-border bg-card/50 backdrop-blur-xl sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
+                <span className="text-sm font-bold">S</span>
+              </div>
+              <div>
+                <h1 className="text-xl font-semibold">StoryGraph</h1>
+                <p className="text-xs text-muted-foreground">Interactive Gaming Stories</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <Icon name="Search" size={16} className="absolute left-3 top-3 text-muted-foreground" />
+                <input 
+                  type="text" 
+                  placeholder="Search stories, choices..."
+                  className="pl-9 pr-4 py-2 bg-input border border-border rounded-full w-64 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+              
+              <Button variant="ghost" size="sm" className="rounded-full">
+                <Icon name="Bell" size={16} />
+              </Button>
+              
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent to-primary"></div>
             </div>
           </div>
         </div>
+      </nav>
 
-        {/* Основная сетка как в макете */}
-        <div className="grid grid-cols-12 gap-6">
-          {/* Левая колонка - Недавние сюжеты и Последнее достижение */}
-          <div className="col-span-3 space-y-6">
-            {/* Недавние сюжеты */}
-            <Card className="h-fit">
-              <CardHeader>
-                <CardTitle className="text-lg">Недавние сюжеты</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {recentGames.map((game, index) => (
-                  <div key={index} className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded flex items-center justify-center">
-                        <Icon name="Gamepad2" size={16} className="text-white" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-sm truncate">{game.title}</p>
-                        <p className="text-xs text-muted-foreground">81 из 90</p>
-                      </div>
-                      <span className="text-sm">{game.rating}</span>
-                    </div>
-                    <Progress value={game.progress} className="h-1" />
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Последнее достижение */}
-            <Card className="h-fit">
-              <CardHeader>
-                <CardTitle className="text-lg">Последнее достижение</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Icon name="Trophy" size={24} className="text-white" />
-                  </div>
-                  <p className="text-sm text-muted-foreground">Пока достижений нет</p>
-                </div>
-              </CardContent>
-            </Card>
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Hero Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              Explore Interactive Stories
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Dive deep into game narratives. Visualize choices, track consequences, and discover every possible storyline.
+            </p>
           </div>
 
-          {/* Центральная колонка - Главная игра и статистики */}
-          <div className="col-span-6 space-y-6">
-            {/* Главная карточка игры */}
+          {/* Stats Overview */}
+          <div className="grid grid-cols-4 gap-6 mb-12">
             <Card className="relative overflow-hidden">
-              <div className="absolute top-4 right-4 z-10">
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
-                  <Icon name="Heart" size={20} className="text-red-500 fill-current" />
-                </Button>
-              </div>
-              
-              <div className="h-64 bg-gradient-to-br from-orange-600 via-red-600 to-red-800 relative">
-                <div className="absolute inset-0 bg-black/20" />
-                <div className="relative h-full flex flex-col justify-between p-6 text-white">
-                  <div className="flex items-start justify-between">
-                    <div className="w-16 h-20 bg-black/40 rounded border-2 border-white/20 flex items-center justify-center">
-                      <span className="text-2xl">🎮</span>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h2 className="text-2xl font-bold mb-2">Ведьмак 3: Дикая охота</h2>
-                    <div className="flex items-center space-x-4 mb-4">
-                      <div className="flex items-center space-x-1">
-                        <Icon name="Star" size={16} className="text-yellow-400 fill-current" />
-                        <span className="text-sm">4.9</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Icon name="MessageCircle" size={16} />
-                        <span className="text-sm">74</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Icon name="Share2" size={16} />
-                        <span className="text-sm">37</span>
-                      </div>
-                    </div>
-                    <p className="text-sm opacity-90 mb-4">117/150 веток</p>
-                    <div className="flex space-x-2">
-                      <Badge className="bg-white/20 text-white hover:bg-white/30">RPG</Badge>
-                      <Badge className="bg-white/20 text-white hover:bg-white/30">Action</Badge>
-                    </div>
-                  </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-2">
+                  <Icon name="BookOpen" size={24} className="text-primary" />
+                  <Badge variant="secondary" className="text-xs">+12%</Badge>
                 </div>
-              </div>
-              
-              <CardContent className="p-6">
-                <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                  <Icon name="Play" size={16} className="mr-2" />
-                  Продолжить
-                </Button>
+                <p className="text-2xl font-bold">47</p>
+                <p className="text-sm text-muted-foreground">Stories Explored</p>
               </CardContent>
             </Card>
 
-            {/* Нижние блоки статистики */}
-            <div className="grid grid-cols-3 gap-4">
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <Icon name="BarChart3" size={24} className="text-primary mb-2 mx-auto" />
-                  <p className="text-sm text-muted-foreground mb-1">Процент завершения</p>
-                  <p className="text-2xl font-bold">75%</p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <Icon name="Target" size={24} className="text-green-500 mb-2 mx-auto" />
-                  <p className="text-sm text-muted-foreground mb-1">Веток пройдено</p>
-                  <p className="text-2xl font-bold">117</p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <div className="flex justify-center mb-2">
-                    {[1,2,3,4].map((star) => (
-                      <Icon key={star} name="Star" size={16} className="text-yellow-400 fill-current" />
-                    ))}
-                    <Icon name="Star" size={16} className="text-gray-400" />
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-1">Поставьте оценку игре</p>
-                  <p className="text-2xl font-bold">4.5</p>
-                </CardContent>
-              </Card>
-            </div>
+            <Card className="relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-transparent"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-2">
+                  <Icon name="GitBranch" size={24} className="text-secondary" />
+                  <Badge variant="secondary" className="text-xs">+8%</Badge>
+                </div>
+                <p className="text-2xl font-bold">1,247</p>
+                <p className="text-sm text-muted-foreground">Choices Made</p>
+              </CardContent>
+            </Card>
+
+            <Card className="relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-2">
+                  <Icon name="Target" size={24} className="text-accent" />
+                  <Badge variant="secondary" className="text-xs">+25%</Badge>
+                </div>
+                <p className="text-2xl font-bold">89%</p>
+                <p className="text-sm text-muted-foreground">Completion Rate</p>
+              </CardContent>
+            </Card>
+
+            <Card className="relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent"></div>
+              <CardContent className="p-6 relative">
+                <div className="flex items-center justify-between mb-2">
+                  <Icon name="Clock" size={24} className="text-purple-500" />
+                  <Badge variant="secondary" className="text-xs">Today</Badge>
+                </div>
+                <p className="text-2xl font-bold">4.2h</p>
+                <p className="text-sm text-muted-foreground">Time Played</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-12 gap-8">
+          {/* Left Column - Game Library */}
+          <div className="col-span-8">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Your Story Library</CardTitle>
+                  <Button variant="ghost" size="sm">
+                    <Icon name="Plus" size={16} className="mr-2" />
+                    Add Game
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-6">
+                  {gameLibrary.map((game, index) => (
+                    <Card key={index} className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
+                      <CardContent className="p-0">
+                        <div className={`h-32 bg-gradient-to-br ${game.color} relative rounded-t-lg`}>
+                          <div className="absolute inset-0 bg-black/20 rounded-t-lg" />
+                          <div className="absolute top-4 right-4">
+                            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
+                              <Icon name="Heart" size={16} />
+                            </Button>
+                          </div>
+                          <div className="absolute bottom-4 left-4 text-white">
+                            <h3 className="font-semibold text-lg">{game.title}</h3>
+                            <p className="text-sm opacity-90">{game.nodes} story nodes</p>
+                          </div>
+                        </div>
+                        <div className="p-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm text-muted-foreground">Progress</span>
+                            <span className="text-sm font-medium">{game.progress}%</span>
+                          </div>
+                          <Progress value={game.progress} className="h-2" />
+                          <div className="flex items-center justify-between mt-4">
+                            <Button variant="ghost" size="sm">
+                              <Icon name="BarChart3" size={14} className="mr-2" />
+                              Analytics
+                            </Button>
+                            <Button size="sm" className="bg-gradient-to-r from-primary to-secondary">
+                              <Icon name="Play" size={14} className="mr-2" />
+                              Continue
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Favorites Section */}
+            <Card className="mt-8">
+              <CardHeader>
+                <CardTitle className="text-xl flex items-center">
+                  <Icon name="Heart" size={20} className="mr-2 text-red-500" />
+                  Favorite Moments
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { title: "The Baron's Family Quest", game: "The Witcher 3", impact: "High" },
+                    { title: "Johnny Silverhand Choice", game: "Cyberpunk 2077", impact: "Critical" },
+                    { title: "Shepard's Final Decision", game: "Mass Effect", impact: "Ending" },
+                  ].map((moment, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-accent/5 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+                        <div>
+                          <h4 className="font-medium">{moment.title}</h4>
+                          <p className="text-sm text-muted-foreground">{moment.game}</p>
+                        </div>
+                      </div>
+                      <Badge variant={moment.impact === "Critical" ? "destructive" : "secondary"}>
+                        {moment.impact}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Правая колонка - Избранное и Аналитика */}
-          <div className="col-span-3 space-y-6">
-            {/* Избранное */}
-            <Card className="h-fit">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-                <CardTitle className="text-lg">Избранное</CardTitle>
-                <Button variant="ghost" size="icon" className="text-muted-foreground">
-                  <Icon name="Settings" size={16} />
-                </Button>
+          {/* Right Column - Analytics & Activity */}
+          <div className="col-span-4 space-y-6">
+            {/* Analytics */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center">
+                  <Icon name="TrendingUp" size={18} className="mr-2" />
+                  Story Analytics
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">Покажи нам свои любимые игры. Они здесь!</p>
-                <div className="h-32 flex items-center justify-center text-muted-foreground">
-                  <div className="text-center">
-                    <Icon name="Heart" size={32} className="mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">Избранных игр пока нет</p>
+                <div className="space-y-6">
+                  {/* Choice Distribution */}
+                  <div>
+                    <h4 className="text-sm font-medium mb-3">Choice Distribution</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span>Heroic</span>
+                        <span>65%</span>
+                      </div>
+                      <Progress value={65} className="h-1" />
+                      
+                      <div className="flex items-center justify-between text-sm">
+                        <span>Neutral</span>
+                        <span>25%</span>
+                      </div>
+                      <Progress value={25} className="h-1" />
+                      
+                      <div className="flex items-center justify-between text-sm">
+                        <span>Renegade</span>
+                        <span>10%</span>
+                      </div>
+                      <Progress value={10} className="h-1" />
+                    </div>
+                  </div>
+
+                  {/* Weekly Activity */}
+                  <div>
+                    <h4 className="text-sm font-medium mb-3">Weekly Activity</h4>
+                    <div className="h-16 flex items-end space-x-1">
+                      {[40, 65, 30, 80, 45, 90, 55].map((height, i) => (
+                        <div 
+                          key={i} 
+                          className="flex-1 bg-gradient-to-t from-primary to-secondary rounded-t"
+                          style={{ height: `${height}%` }}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Аналитика */}
-            <Card className="h-fit">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-                <CardTitle className="text-lg">Аналитика</CardTitle>
-                <Button variant="ghost" size="icon" className="text-muted-foreground">
-                  <Icon name="TrendingUp" size={16} />
-                </Button>
+            {/* Recent Activity */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center">
+                  <Icon name="Activity" size={18} className="mr-2" />
+                  Recent Activity
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">Изучай свои любимые игры. Они здесь!</p>
-                <div className="h-32 flex items-center justify-center text-muted-foreground">
-                  <div className="text-center">
-                    <Icon name="BarChart3" size={32} className="mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">Данных для аналитики пока нет</p>
+                <div className="space-y-4">
+                  {recentActivity.map((activity, index) => (
+                    <div key={index} className="flex items-start space-x-3">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">{activity.action}</p>
+                        <p className="text-xs text-muted-foreground">{activity.game} • {activity.time} ago</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <Button variant="ghost" size="sm" className="w-full mt-4">
+                  View All Activity
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Achievement */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center">
+                  <Icon name="Trophy" size={18} className="mr-2" />
+                  Latest Achievement
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-secondary to-accent flex items-center justify-center mx-auto mb-4">
+                    <Icon name="Star" size={24} className="text-white" />
                   </div>
+                  <h3 className="font-semibold mb-1">Story Explorer</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Discovered 50 unique story branches</p>
+                  <Badge className="bg-gradient-to-r from-primary to-secondary">
+                    Just unlocked!
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
